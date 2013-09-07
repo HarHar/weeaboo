@@ -88,10 +88,6 @@ if '--compile-kakasi' in sys.argv:
 	print('')
 
 	print('\n\nDONE!')
-	#print('But there\'s one step left, you must install it, as our script should not be trusted with root priviledges!')
-	#print('To install it do this (as root):')
-	#print('cd ' + os.path.join(workdir, 'kakasi-2.3.4/') + '; make install')
-	#print('and you\'re all set')
 	exit(0)
 
 jTransliterateURLs = {'https://raw.github.com/ryanmcgrath/jTransliterate/master/jTransliterate/__init__.py': 'jTransliterate.py',
@@ -115,7 +111,6 @@ if (subprocess.Popen(['which', 'kakasi'], stdout=-1, stderr=-1).wait() != 0) or 
 		import urllib2
 		import os
 
-
 		for URL in jTransliterateURLs:
 			data = urllib2.urlopen(URL).read()
 			f = open(os.path.join(curDir(), jTransliterateURLs[URL]), 'w')
@@ -124,22 +119,6 @@ if (subprocess.Popen(['which', 'kakasi'], stdout=-1, stderr=-1).wait() != 0) or 
 			del data
 
 		from jTransliterate import JapaneseTransliterator
-		sys.stderr.write(' done!\n')
-
-	try:
-		import translate
-	except ImportError:
-		sys.stderr.write('translate not found, downloading...')
-		import urllib2
-		import os
-
-		data = urllib2.urlopen('https://raw.github.com/terryyin/google-translate-python/master/translate.py')
-		f = open(os.path.join(curDir(), 'translate.py'), 'w')
-		f.write(data)
-		f.close()
-		del data
-
-		import translate
 		sys.stderr.write(' done!\n')
 else:
 	kakasi = True
